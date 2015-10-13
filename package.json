@@ -10,20 +10,24 @@
     "async": "latest"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-coffee": "latest",
-    "gulp-sync": "latest",
-    "gulp-concat": "latest",
-    "gulp-browserify": "latest",
-    "gulp-jshint": "latest",
-    "gulp-uglify": "latest",
-    "gulp-cssmin": "latest",
-    "gulp-less": "latest",
-    "gulp-util": "latest",
-    "gulp-nodemon": "latest",
-    "gulp-livereload": "latest",
+    "browser-sync": "^2.9.11",
+    "coffee-script": "latest",
     "del": "latest",
-    "gulp-util":"latest",
-    "coffee-script":"latest"
+    "gulp": "^3.9.0",
+    "gulp-browserify": "latest",
+    "gulp-coffee": "latest",
+    "gulp-concat": "latest",
+    "gulp-cssmin": "latest",
+    "gulp-jshint": "latest",
+    "gulp-less": "latest",
+    "gulp-livereload": "latest",
+    "gulp-nodemon": "latest",
+    "gulp-rename": "^1.2.2",
+    "gulp-sync": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "micromatch": "^2.2.0",
+    "run-sequence": "^1.1.4",
+    "yargs": "^3.27.0"
   }
 }
