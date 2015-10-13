@@ -1,0 +1,15 @@
+{
+  "name": "ssearch",
+  "version": "0.0.1",
+  "dependencies": {
+    "koa": "latest",
+    "swig": "latest",
+    "koa-swig": "latest",
+    "mongoose": "latest",
+    "async": "latest"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-coffee": "latest"
+  }
+}
