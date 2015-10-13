@@ -1,6 +1,7 @@
 {
   "name": "ssearch",
   "version": "0.0.1",
+  "start": "coffee app",
   "dependencies": {
     "koa": "latest",
     "swig": "latest",
@@ -10,6 +11,19 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-coffee": "latest"
+    "gulp-coffee": "latest",
+    "gulp-sync": "latest",
+    "gulp-concat": "latest",
+    "gulp-browserify": "latest",
+    "gulp-jshint": "latest",
+    "gulp-uglify": "latest",
+    "gulp-cssmin": "latest",
+    "gulp-less": "latest",
+    "gulp-util": "latest",
+    "gulp-nodemon": "latest",
+    "gulp-livereload": "latest",
+    "del": "latest",
+    "gulp-util":"latest",
+    "coffee-script":"latest"
   }
 }
