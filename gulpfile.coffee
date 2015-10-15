@@ -30,9 +30,10 @@ gulp.task('clean', (callback)->
 
 gulp.task('coffee-server', ->
   gulp.src([
-    './src/**/*.coffee'
-    '!./src/public/**/*.coffee'
-    '!./src/views/**'
+    'app.coffee'
+    './server/**/*.coffee'
+    './core/**/*.coffee'
+    './config.*coffee'
   ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/'))
@@ -40,32 +41,35 @@ gulp.task('coffee-server', ->
 
 gulp.task('copy-server', ->
   gulp.src([
-    './src/config*/*.json'
-    './src/database*/*.*'
+    './config/*.json'
+    './server/database/*.*'
   ])
   .pipe(gulp.dest('./dist/'))
 )
 
 gulp.task('copy-client', ->
   gulp.src([
-    './src/public*/**/*'
-    '!./src/public*/**/*.coffee'
+    './public/**/*'
+    './public/*'
   ])
   .pipe(gulp.dest('./dist/'))
 )
 
 gulp.task('coffee-client', ->
   gulp.src([
-    './src/public*/**/*.coffee'
+    './public/**/*.coffee'
   ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/'))
 )
 
 gulp.task('copy-views', ->
-  gulp.src('./src/views/**/*.html')
+  gulp.src([
+    './server/views/**/*.html'
+    './server/views/*.html'
+    ])
   .pipe(rename({extname: '.vash'}))
-  .pipe(gulp.dest('./dist/views'))
+  .pipe(gulp.dest('./dist/'))
 )
 
 
@@ -75,8 +79,9 @@ gulp.task('serve', (callback)->
   called = false
   if not nodemon_instance
     nodemon_instance = nodemon({
-      script: './dist/index.js'
+      script: './dist/app.js'
       ext: 'none'
+      execMap: 'js':'node --harmony'    
     })
     .on('restart', ->
       console.log('restart server......................')
@@ -108,10 +113,12 @@ gulp.task('browserSync', ->
 # --监视任务------------------------------------------------
 gulp.task('watch', ->
   gulp.watch([
-    './src/**/*.*'
-    '!./src/**/*.coffee'
+    './server/views/*.*'
+    './public/**/*'
   ], ['reload-client'])
-  gulp.watch('./src/**/*.coffee', ['reload-server'])
+  gulp.watch([
+    './**/*.coffee'
+  ], ['reload-server'])
 )
 
 gulp.task('reload-client', (callback) ->
