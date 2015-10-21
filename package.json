@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "start": "coffee app",
   "dependencies": {
+    "co-body": "latest",
+    "co-views": "latest",
     "koa": "latest",
-    "swig": "latest",
+    "koa-logger": "latest",
+    "koa-route": "latest",
+    "koa-static": "^1.5.1",
     "koa-swig": "latest",
     "mongoose": "latest",
-    "async": "latest"
+    "swig": "latest"
   },
   "devDependencies": {
     "browser-sync": "^2.9.11",
@@ -16,6 +20,7 @@
     "gulp": "^3.9.0",
     "gulp-browserify": "latest",
     "gulp-coffee": "latest",
+    "gulp-coffeelint": "^0.5.0",
     "gulp-concat": "latest",
     "gulp-cssmin": "latest",
     "gulp-jshint": "latest",

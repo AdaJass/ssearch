@@ -1,6 +1,6 @@
 gulp = require('gulp')
 runSequence = require('run-sequence')
-
+coffeelint=require ('gulp-coffeelint')
 coffee = require('gulp-coffee')
 gutil = require('gulp-util')
 del = require('del')
@@ -13,11 +13,23 @@ reload = browserSync.reload
 # 处理参数
 isDebug = not (argv.r || false)
 
+filepath={}
+filepath.coffee=[  
+  '*.coffee'
+  'controllers/*.coffee'
+  'common/*.coffee'
+  'config/*.coffee'
+]
+filepath.js=[
+  'dist/**/*.js'
+  '!dist/public/**'
+]
+
 # --入口任务-----------------------------------------------------------------
 gulp.task('default', (callback)->
   runSequence(
     ['clean']
-    ['coffee-server', 'copy-server', 'copy-client', 'coffee-client', 'copy-views']
+    ['validate-coffee','coffee-server', 'copy-data', 'copy-client', 'coffee-client', 'copy-views']
     'serve'
     ['browserSync', 'watch']
     callback
@@ -28,48 +40,66 @@ gulp.task('clean', (callback)->
   del(['./dist/'], callback)
 )
 
+gulp.task('validate-coffee', ->
+  gulp.src(filepath.coffee)
+    .pipe(coffeelint())
+    .pipe(coffeelint.reporter())
+)
+
 gulp.task('coffee-server', ->
   gulp.src([
-    'app.coffee'
-    './server/**/*.coffee'
-    './core/**/*.coffee'
-    './config.*coffee'
+    'app.coffee'       
   ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/'))
+
+  gulp.src([
+    'controllers/*.coffee'
+    ])
+  .pipe(coffee({bare: true}).on('error', gutil.log))
+  .pipe(gulp.dest('./dist/controllers/'))
+
+  gulp.src([
+    'config/*.coffee'
+    ])
+  .pipe(coffee({bare: true}).on('error', gutil.log))
+  .pipe(gulp.dest('./dist/config/'))
+
+  gulp.src([
+    'common/*.coffee'
+    ])
+  .pipe(coffee({bare: true}).on('error', gutil.log))
+  .pipe(gulp.dest('./dist/common/'))
 )
 
-gulp.task('copy-server', ->
-  gulp.src([
-    './config/*.json'
-    './server/database/*.*'
+gulp.task('copy-data', ->
+  gulp.src([    
+    'database/*.*'
   ])
-  .pipe(gulp.dest('./dist/'))
+  .pipe(gulp.dest('./dist/database/'))
 )
 
 gulp.task('copy-client', ->
   gulp.src([
-    './public/**/*'
-    './public/*'
+    'public/**/*'
+    'public/*'
   ])
-  .pipe(gulp.dest('./dist/'))
+  .pipe(gulp.dest('./dist/public/'))
 )
 
 gulp.task('coffee-client', ->
   gulp.src([
-    './public/**/*.coffee'
+    'public/script/*.coffee'
   ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
-  .pipe(gulp.dest('./dist/'))
+  .pipe(gulp.dest('./dist/public/js/'))
 )
 
 gulp.task('copy-views', ->
-  gulp.src([
-    './server/views/**/*.html'
-    './server/views/*.html'
+  gulp.src([    
+    'views/*.html'
     ])
-  .pipe(rename({extname: '.vash'}))
-  .pipe(gulp.dest('./dist/'))
+   .pipe(gulp.dest('./dist/views/'))
 )
 
 
@@ -113,16 +143,15 @@ gulp.task('browserSync', ->
 # --监视任务------------------------------------------------
 gulp.task('watch', ->
   gulp.watch([
-    './server/views/*.*'
-    './public/**/*'
+    'views/*.*'
+    'public/**/*'
   ], ['reload-client'])
-  gulp.watch([
-    './**/*.coffee'
-  ], ['reload-server'])
+  gulp.watch(filepath.coffee, ['reload-server'])
+  gulp.watch(filepath.js, ['reload-server'])
 )
 
 gulp.task('reload-client', (callback) ->
-  runSequence(
+  runSequence(    
     ['copy-client', 'coffee-client', 'copy-views']
     'bs-reload'
     callback
@@ -130,8 +159,8 @@ gulp.task('reload-client', (callback) ->
 )
 
 gulp.task('reload-server', (callback) ->
-  runSequence(
-    ['copy-server', 'coffee-server']
+  runSequence(    
+    ['copy-data', 'validate-coffee','coffee-server']
     'serve'
     'bs-reload'
     callback
