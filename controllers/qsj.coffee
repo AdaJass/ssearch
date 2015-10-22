@@ -1,4 +1,5 @@
 render=require '../config/render'
 
 exports.main=->
-    render('shiyi')
+	console.log 'im in qsj'
+	render('shiyi')

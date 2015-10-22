@@ -15,7 +15,7 @@ isDebug = not (argv.r || false)
 
 filepath={}
 filepath.coffee=[  
-  '*.coffee'
+  'app.coffee'
   'controllers/*.coffee'
   'common/*.coffee'
   'config/*.coffee'
@@ -48,25 +48,25 @@ gulp.task('validate-coffee', ->
 
 gulp.task('coffee-server', ->
   gulp.src([
-    'app.coffee'       
+    'app.coffee'      
   ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/'))
 
   gulp.src([
-    'controllers/*.coffee'
+    'controllers/**'
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/controllers/'))
 
   gulp.src([
-    'config/*.coffee'
+    'config/**'
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/config/'))
 
   gulp.src([
-    'common/*.coffee'
+    'common/**'
     ])
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/common/'))
@@ -74,15 +74,15 @@ gulp.task('coffee-server', ->
 
 gulp.task('copy-data', ->
   gulp.src([    
-    'database/*.*'
+    'database/**'
   ])
-  .pipe(gulp.dest('./dist/database/'))
+  .pipe(gulp.dest('./dist/database/'))  
 )
 
 gulp.task('copy-client', ->
   gulp.src([
-    'public/**/*'
-    'public/*'
+    'public/**' 
+    '!public/**/*.coffee'   
   ])
   .pipe(gulp.dest('./dist/public/'))
 )
@@ -143,8 +143,8 @@ gulp.task('browserSync', ->
 # --监视任务------------------------------------------------
 gulp.task('watch', ->
   gulp.watch([
-    'views/*.*'
-    'public/**/*'
+    'views/**'
+    'public/**'
   ], ['reload-client'])
   gulp.watch(filepath.coffee, ['reload-server'])
   gulp.watch(filepath.js, ['reload-server'])
