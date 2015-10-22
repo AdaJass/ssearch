@@ -7,6 +7,7 @@
     "co-views": "latest",
     "koa": "latest",
     "koa-logger": "latest",
+    "koa-mongo": "^0.4.1",
     "koa-route": "latest",
     "koa-static": "^1.5.1",
     "koa-swig": "latest",
