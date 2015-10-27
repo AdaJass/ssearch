@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "start": "coffee app",
   "dependencies": {
+    "bson": "^0.4.19",
     "co": "^4.6.0",
     "co-body": "latest",
     "co-mongo": "",

@@ -134,7 +134,7 @@ gulp.task('serve', (callback)->
 
 gulp.task('browserSync', ->
   browserSync({
-    proxy: 'localhost:3000'
+    proxy: 'localhost:30000'
     port: 8888
   #files: ['./src/public/**/*']
     open: true

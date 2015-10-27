@@ -1,4 +1,5 @@
 git add app.coffee
+git add jsgulpfile.js
 git add database.bat
 git add gulpfile.coffee
 git add onekeyCommit.bat
