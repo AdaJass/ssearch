@@ -1,7 +1,7 @@
 gulp = require('gulp')
 runSequence = require('run-sequence')
-coffeelint=require ('gulp-coffeelint')
 coffee = require('gulp-coffee')
+coffeelint=require ('gulp-coffeelint')
 gutil = require('gulp-util')
 del = require('del')
 nodemon = require('gulp-nodemon')
@@ -29,7 +29,7 @@ filepath.js=[
 gulp.task('default', (callback)->
   runSequence(
     ['clean']
-    ['coffee-server', 'copy-client', 'coffee-client', 'copy-views']
+    ['copy-data','coffee-server', 'copy-client', 'coffee-client', 'copy-views']
     'serve'
     ['browserSync', 'watch']
     callback
@@ -71,13 +71,17 @@ gulp.task('coffee-server', ->
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/common/'))
 )
-
-
 gulp.task('copy-data', ->
   gulp.src([    
-    'database/**'
+    'jsgulpfile.js'    
   ])
-  .pipe(gulp.dest('./dist/database/'))  
+  .pipe(rename('gulpfile.js'))
+  .pipe(gulp.dest('./dist/'))
+
+  gulp.src([    
+    'package.json'
+  ])
+  .pipe(gulp.dest('./dist/'))  
 )
 
 gulp.task('copy-client', ->
