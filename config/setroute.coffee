@@ -1,3 +1,10 @@
+loadmd=require '../common/loadmodules'
+config=require './config'
+#------------load router moudle--------------------------
+
+mod=loadmd.loadModules(config.rootpath+'/controllers','.js')
+mood=loadmd.loadDeepModules(config.rootpath+'/controllers','.js')
+
 exports.main=(next)->
     this.body='welcom to my page, you can browse "/shiyi" page'
     yield next

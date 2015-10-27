@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "start": "coffee app",
   "dependencies": {
+    "co": "^4.6.0",
     "co-body": "latest",
+    "co-mongo": "",
     "co-views": "latest",
     "koa": "latest",
     "koa-logger": "latest",
-    "koa-mongo": "^0.4.1",
     "koa-route": "latest",
     "koa-static": "^1.5.1",
     "koa-swig": "latest",
-    "mongoose": "latest",
     "swig": "latest"
   },
   "devDependencies": {

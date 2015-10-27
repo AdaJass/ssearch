@@ -29,7 +29,7 @@ filepath.js=[
 gulp.task('default', (callback)->
   runSequence(
     ['clean']
-    ['validate-coffee','coffee-server', 'copy-data', 'copy-client', 'coffee-client', 'copy-views']
+    ['coffee-server', 'copy-client', 'coffee-client', 'copy-views']
     'serve'
     ['browserSync', 'watch']
     callback
@@ -71,6 +71,7 @@ gulp.task('coffee-server', ->
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/common/'))
 )
+
 
 gulp.task('copy-data', ->
   gulp.src([    
@@ -147,7 +148,7 @@ gulp.task('watch', ->
     'public/**'
   ], ['reload-client'])
   gulp.watch(filepath.coffee, ['reload-server'])
-  gulp.watch(filepath.js, ['reload-server'])
+  #gulp.watch(filepath.js, ['reload-server'])
 )
 
 gulp.task('reload-client', (callback) ->
@@ -160,7 +161,7 @@ gulp.task('reload-client', (callback) ->
 
 gulp.task('reload-server', (callback) ->
   runSequence(    
-    ['copy-data', 'validate-coffee','coffee-server']
+    ['coffee-server']
     'serve'
     'bs-reload'
     callback
