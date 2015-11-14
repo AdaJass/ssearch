@@ -11,7 +11,7 @@ co= require 'co'
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 co(mongo.connect()) #connect to the database
 app=koa()
-#app.use log()
+app.use log()
 
 #------------below is router set-------------------
 app.use(require('koa-static')(__dirname+'/public'))
