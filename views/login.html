@@ -3,13 +3,19 @@
 {% block content %}
 <form action="_acc_login" method="post">
     <div>
-        <label for='uaccount' >帐号名</label>
-        <input type="text" id="uaccount" name="account" placeholder="输入昵称">
-        </div>
+        <label for='uaccount' >帐号</label>
+        <input type="text" id="uaccount" name="account" placeholder="输入昵称"></div>
 
     <div>
         <label for='upassword'>{{question}}</label>
-                    <input type="password" id="upsw" name="Password" placeholder="" required minlength="5" maxlength="18">
+        <input type="password" id="upsw" name="Password" placeholder="" required minlength="5" maxlength="18"></div>
+
+    <div >
+
+        <input type="hidden" name="_csrf" value="{{ csrf }}" />
+
+        <button type="submit" >保存</button>
+
     </div>
 </form>
 {% endblock %}

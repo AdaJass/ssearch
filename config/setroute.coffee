@@ -1,5 +1,5 @@
 loadmd=require '../common/loadmodules'
-config=require './config'
+config=require './index'
 #------------load router moudle--------------------------
 
 mod=loadmd.loadModules(config.rootpath+'/controllers','.js')

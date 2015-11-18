@@ -1,7 +1,7 @@
 gulp = require('gulp')
 runSequence = require('run-sequence')
-coffee = require('gulp-coffee')
 coffeelint=require ('gulp-coffeelint')
+coffee = require('gulp-coffee')
 gutil = require('gulp-util')
 del = require('del')
 nodemon = require('gulp-nodemon')
@@ -29,7 +29,7 @@ filepath.js=[
 gulp.task('default', (callback)->
   runSequence(
     ['clean']
-    ['copy-data','coffee-server', 'copy-client', 'coffee-client', 'copy-views']
+    ['coffee-server', 'copy-data','copy-client', 'coffee-client', 'copy-views']
     'serve'
     ['browserSync', 'watch']
     callback
@@ -37,7 +37,9 @@ gulp.task('default', (callback)->
 )
 # --构建相关任务---------------------------------------
 gulp.task('clean', (callback)->
-  del(['./dist/'], callback)
+  del([
+    './dist/'    
+    ], callback)
 )
 
 gulp.task('validate-coffee', ->
@@ -71,17 +73,18 @@ gulp.task('coffee-server', ->
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(gulp.dest('./dist/common/'))
 )
+
+
 gulp.task('copy-data', ->
   gulp.src([    
-    'jsgulpfile.js'    
+    'database/**'
   ])
-  .pipe(rename('gulpfile.js'))
-  .pipe(gulp.dest('./dist/'))
+  .pipe(gulp.dest('./dist/database/'))
 
   gulp.src([    
-    'package.json'
+    'bower_components/**'
   ])
-  .pipe(gulp.dest('./dist/'))  
+  .pipe(gulp.dest('./dist/bower_components/'))   
 )
 
 gulp.task('copy-client', ->
@@ -102,7 +105,7 @@ gulp.task('coffee-client', ->
 
 gulp.task('copy-views', ->
   gulp.src([    
-    'views/*.html'
+    'views/**'
     ])
    .pipe(gulp.dest('./dist/views/'))
 )
@@ -134,7 +137,7 @@ gulp.task('serve', (callback)->
 
 gulp.task('browserSync', ->
   browserSync({
-    proxy: 'localhost:30000'
+    proxy: 'localhost:3000'
     port: 8888
   #files: ['./src/public/**/*']
     open: true

@@ -7,7 +7,7 @@
 
 comongo = require('co-mongo')
 connect = comongo.connect
-config = require('./config')
+config = require('./index')
 
 #extending and exposing top co-mongo namespace like this is not optimal but it saves the user from one extra require();
 module.exports = comongo;

@@ -1,9 +1,9 @@
 git add app.coffee
-git add jsgulpfile.js
 git add database.bat
 git add gulpfile.coffee
 git add onekeyCommit.bat
 git add package.json
+git add bower.json
 git add README.md
 git add doc
 git add common

@@ -9,13 +9,23 @@
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        {% for item in assets.main.css %}
+        {% for item in main.css %}
         <link rel="stylesheet" href="{{item}}">
         {% endfor %}
 
-        {% for item in assets.main.js.head %}
+        {% for item in main.headerjs %}
         <script src="{{item}}"></script>
         {% endfor %}
+
+        {% block headerjs %}
+         <script>
+            avalon.config({
+                interpolate: ["{[","]}"]
+            });
+            
+        </script>
+
+        {% endblock %}
 
         {% block css %}{% endblock %}
     </head>
@@ -30,11 +40,11 @@
 
         </div>
 
-        {% for item in assets.main.js.foot %}
+        {% for item in main.footerjs %}
         <script src="{{item}}"></script>
         {% endfor %}
 
-        {% block js %}{% endblock %}
+        {% block footerjs %}{% endblock %}
 
     
     </body>
