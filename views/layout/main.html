@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{item}}">
         {% endfor %}
 
-        {% for item in assets.main.js.head %}
+        {% for item in assets.main.headjs %}
         <script src="{{item}}"></script>
         {% endfor %}
 
@@ -30,7 +30,7 @@
 
         </div>
 
-        {% for item in assets.main.js.foot %}
+        {% for item in assets.main.footjs %}
         <script src="{{item}}"></script>
         {% endfor %}
 

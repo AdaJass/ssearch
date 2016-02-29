@@ -1,4 +1,9 @@
 render=require '../config/render'
+config=require '../config' 
+
 
 exports.main=->
-    render('shiyi')
+	data={}
+	data.title='搜索结果'
+	data.main=config.mainAssets
+	render('search',data)
