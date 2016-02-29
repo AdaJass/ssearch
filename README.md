@@ -1,4 +1,4 @@
-Ssearch is a chatable search website
+Ssearch is a chatable search website, written in coffescript. After compiling, you can get .js file in dist directory. 
 
 # Installation
 If you want to run this web server on your cp. you need to preinstall nodejs and mongodb. I assume your computer has met these. And then, clone this repository to your computer, run a command line switch to its directory. and then type:
