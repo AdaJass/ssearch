@@ -19,6 +19,7 @@
     "coffee-script": "latest",
     "del": "latest",
     "gulp": "^3.9.0",
+    "gulp-bootlint": "^0.7.1",
     "gulp-browserify": "latest",
     "gulp-coffee": "latest",
     "gulp-coffeelint": "^0.5.0",

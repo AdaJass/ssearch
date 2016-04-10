@@ -7,6 +7,7 @@ del = require('del')
 nodemon = require('gulp-nodemon')
 argv = require('yargs').argv
 rename = require('gulp-rename')
+bootlint  = require('gulp-bootlint')
 browserSync = require('browser-sync')
 reload = browserSync.reload
 
@@ -107,6 +108,7 @@ gulp.task('copy-views', ->
   gulp.src([    
     'views/**'
     ])
+   .pipe(bootlint())
    .pipe(gulp.dest('./dist/views/'))
 )
 
