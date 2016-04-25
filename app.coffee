@@ -21,5 +21,5 @@ app.use route.get('/:para', setroute.control1)
 app.use route.get('/:para1/:para2', setroute.control2)
 app.use route.get('/', setroute.main)
 #+++++++++++++++++++++++++++++++++++++++++++++++++++
-app.listen(3000)
+app.listen(3000,'localhost')
 console.log 'listening on port 3000'
